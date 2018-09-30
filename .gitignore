@@ -1,2 +1,4 @@
-#ignore token file
 datafile
+media
+media/*
+.DS_Store
