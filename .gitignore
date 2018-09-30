@@ -2,3 +2,6 @@ datafile
 media
 media/*
 .DS_Store
+ready-media
+ready-media/*
+watermarks/*

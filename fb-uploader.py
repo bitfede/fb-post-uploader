@@ -7,6 +7,7 @@
 ####
 
 ## imports
+import os
 import dropbox
 import time
 
@@ -26,7 +27,10 @@ for entry in dbx.files_list_folder('/fb-media-new').entries:
     destpath = f'media/{timestamp}-{filename}'
     dbx.files_download_to_file( destpath, filepath, rev=None)
 
-# print(dir(dbx))
+print("> Downloaded media files from Dropbox")
 
+for filename in os.listdir('./media'):
+    
+    print(filename)
 
 #for each file:
