@@ -21,10 +21,10 @@ dbx = dropbox.Dropbox(apikey)
 
 for entry in dbx.files_list_folder('/fb-media-new').entries:
     timestamp = str(time.time()).split('.')[0]
-    print(entry.name)
-    print(entry.path_lower)
-    # destpath = 
-    # dbx.files_download_to_file(f'media/{timestamp}-{entry.path_lower}', entry.path_lower, rev=None)
+    filename = entry.name
+    filepath = entry.path_lower
+    destpath = f'media/{timestamp}-{filename}'
+    dbx.files_download_to_file( destpath, filepath, rev=None)
 
 # print(dir(dbx))
 
