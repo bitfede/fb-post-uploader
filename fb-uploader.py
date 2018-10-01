@@ -10,6 +10,8 @@
 import os
 import dropbox
 import time
+import requests
+from subprocess import call
 
 ##get the files from Dropbox
 #get the api key
@@ -29,8 +31,21 @@ for entry in dbx.files_list_folder('/fb-media-new').entries:
 
 print("> Downloaded media files from Dropbox")
 
-for filename in os.listdir('./media'):
-    
-    print(filename)
+# apply watermarks
+mediasource = []
+for watermark in os.listdir('./watermarks'):
+    print(f"> Applying watermark {watermark}")
+    path = f"./ready-media/{watermark}"
+    mediasource.append(path)
+    call(["mkdir", path])
+    for filename in os.listdir('./media'):
+        if filename != ".DS_Store":
+            call(["composite", "-dissolve", "40", "-gravity", "SouthEast", "-geometry", "+0+0", "watermarks/watermark1.png", f"media/{filename}", f"./ready-media/{watermark}/{filename}"])
+            print(filename + " -> Watermarked")
+        else:
+            pass
 
-#for each file:
+# images with watermarks created
+
+for filename in os.listdir('./ready-media'):
+    print(f"now post {filename} to FB!")
